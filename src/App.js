@@ -1,25 +1,30 @@
 import logo from './logo.svg';
 import './App.css';
+import { useState, useEffect } from 'react'
 
 function App() {
+  const [value,setValue]= useState();
+  const [list,setList]= useState([]);
+  useEffect(() => {
+    console.log('val', value)
+    setTimeout(() => {
+      setValue('2')
+    }, 1000)
+  }, [value])
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+      <span>
+          <input
+              onChange={(e)=>{
+                  setValue(e.target.value)
+              }}
+              value={value}
+          />
+          {
+              list.map((elem) => {
+                  return (<span key={elem.name}>{elem.name}</span>);
+              })
+          }
+      </span>);
 }
 
 export default App;
